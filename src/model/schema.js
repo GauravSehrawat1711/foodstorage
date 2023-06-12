@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const FruitSchema = new mongoose.Schema({
   name: {
-    type:String,
-    unique:true,
+    type: String,
+    unique: true,
   },
-   amount: Number,
-   description: {
+  amount: {
+    type:Number
+  },
+  description: {
     type: String,
     maxlength: 30,
   },
@@ -14,17 +16,16 @@ const FruitSchema = new mongoose.Schema({
 
 const StoreFruitSchema = new mongoose.Schema({
   name: {
-    type:String,
-    unique:true,
+    type: String,
+    unique: true,
   },
   amount: Number,
   fruit: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Fruit',
+    ref: "Fruit",
   },
-
 });
 const StoreFruitModel = mongoose.model("Store", StoreFruitSchema);
 const FruitModel = mongoose.model("Fruit", FruitSchema);
 
-module.exports = {FruitModel,StoreFruitModel};
+module.exports = { FruitModel, StoreFruitModel };

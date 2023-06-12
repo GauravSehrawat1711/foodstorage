@@ -5,13 +5,17 @@ const findFruits = async (name) => {
   return data;
 };
 
-const saveNewFruit = (name, description, limit) => {
-  const fruit = new FruitModel({
+const saveNewFruit = async (name, description, limit) => {
+  const isAlready=await FruitModel.find({name})
+    if(isAlready?.length>0){
+    throw new Error("Already exists")
+  }
+  const fruit = new  FruitModel({
     name,
     description,
     limit,
-  });
-  return fruit.save();
+  }).save()
+  return fruit;
 };
 
 const updateFruit = async (fruit, name, description, limit) => {

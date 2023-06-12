@@ -10,10 +10,16 @@ const storeFruitToFruitStorage = {
     amount: nonNull(intArg()),
   },
   async resolve(_, { name, amount }) {
-    const fruitData=await findFruits(name)
-    storeCreateService(fruitData,name,amount)
-    const data=await saveFruit(name,amount)
-    return data;
+    try{
+
+      const fruitData=await findFruits(name)
+      storeCreateService(fruitData,name,amount)
+      const data=await saveFruit(name,amount)
+      return data;
+    }catch(error){
+      throw new Error(error)
+    }
+    
   },
 };
 

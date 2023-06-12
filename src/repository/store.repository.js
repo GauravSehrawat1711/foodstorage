@@ -5,8 +5,13 @@ const findStoreFruit = async (name) => {
   return data
 };
 
-const saveFruit = (name, amount) => {
-  const fruit = new StoreFruitModel({
+const saveFruit = async (name, amount) => {
+  const isAlready=await  StoreFruitModel.find({name})
+  console.log(isAlready)
+  if(isAlready.length>0){
+    throw new Error("Allready stored")
+  }
+   const fruit = new StoreFruitModel({
     name,
     amount,
   });
